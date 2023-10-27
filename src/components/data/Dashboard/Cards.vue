@@ -4,7 +4,7 @@
       <div
         v-for="item in cards"
         :key="item.id"
-        class="bg-white rounded-xl h-52 sm:pt-3 md:pt-6 sm:px-3 md:px-6 sm:pb-3 md:pb-5"
+        class="bg-white rounded-xl h-52 sm:pt-4 md:pt-6 sm:px-3 md:px-6 sm:pb-4 md:pb-5"
       >
         <div class="flex items-center justify-between w-full">
           <div class="text-gray-300 text-sm font-medium">
@@ -39,7 +39,7 @@
       </div>
 
       <div
-        class="custom-gradient rounded-xl h-52 sm:pt-3 md:pt-6 sm:px-3 md:px-6 sm:pb-3 md:pb-5"
+        class="custom-gradient rounded-xl h-52 sm:pt-4 md:pt-6 sm:px-3 md:px-6 sm:pb-4 md:pb-5"
       >
         <div class="flex items-center justify-between w-full">
           <div class="text-gray-300 text-sm font-medium">
