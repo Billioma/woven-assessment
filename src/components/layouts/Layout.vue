@@ -8,7 +8,7 @@
         <Sidebar />
       </div>
       <main class="overflow-auto">
-        <div class="pt-28 pl-10 lg:pl-72 pr-10 pb-5">
+        <div class="pt-28 pl-5 lg:pl-72 pr-5 lg:pr-10 pb-5">
           <slot></slot>
         </div>
       </main>

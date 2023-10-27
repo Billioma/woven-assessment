@@ -9,7 +9,7 @@
       Type: {{ filteredTransactionsData[0].type }}
     </div>
 
-    <div class="flex sm:flex-col md:flex-row gap-8 items-start">
+    <div class="flex sm:flex-col md:flex-row gap-6 lg:gap-8 items-start">
       <div class="bg-white rounded-lg py-9 sm:px-5 md:px-10 w-full">
         <div
           class="flex items-center justify-between w-full pb-6 border-b border-gray-900"

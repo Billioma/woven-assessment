@@ -1,7 +1,7 @@
 <template>
-  <div class="flex bg-white flex-col fixed w-screen py-6 pr-10 z-10">
+  <div class="flex bg-white flex-col fixed w-screen py-6 pr-5 lg:pr-10 z-10">
     <div
-      class="flex justify-between items-center pl-10 lg:pl-72 text-black w-full"
+      class="flex justify-between items-center pl-5 lg:pl-72 text-black w-full"
     >
       <div class="text-xl font-extrabold text-gray-300">Dashboard</div>
 
