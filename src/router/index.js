@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
-    path: "/dashboard",
+    path: "/",
     name: "dashboard",
     component: () => import("../views/Dashboard.vue"),
   },
@@ -13,10 +13,8 @@ const routes = [
   },
 ];
 
-const base = "/dashboard";
-
 const router = createRouter({
-  history: createWebHistory(base),
+  history: createWebHistory(process.env.BASE_URL),
   routes,
 });
 
