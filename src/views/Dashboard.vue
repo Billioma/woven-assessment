@@ -1,9 +1,20 @@
 <template>
-  <div class="text-left">Dashboard</div>
+  <div class="text-left">
+    <Cards />
+    <TableLayer />
+  </div>
 </template>
 
 <script>
-export default {};
+import Cards from "../components/data/Dashboard/Cards.vue";
+import TableLayer from "../components/data/Dashboard/TableLayer.vue";
+
+export default {
+  components: {
+    Cards,
+    TableLayer,
+  },
+};
 </script>
 
 <style></style>
