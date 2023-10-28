@@ -1,9 +1,9 @@
 <template>
   <div class="custom-gradient h-screen flex justify-between fixed z-10 w-60">
     <div class="flex-1 h-screen overflow-auto">
-      <div class="sticky pt-9 top-0 custom-gradient z-10">
+      <div class="sticky pt-5 top-0 custom-gradient z-10">
         <div
-          class="mx-6 flex gap-2 bg-red rounded-md border border-red px-11 py-3 text-white"
+          class="mx-4 flex gap-2 bg-red rounded-md border border-red px-11 py-3 text-white"
         >
           <img src="../../assets/user-icon.svg" class="w-8 h-8" />
           <div>
@@ -13,14 +13,14 @@
         </div>
       </div>
 
-      <div class="mx-3 mt-9">
+      <div class="mx-3 mt-6">
         <nav class="flex flex-col">
           <router-link
             v-for="item in generalRoutes"
             :key="item.id"
             :to="item.path"
             :class="[
-              'py-3 px-3 rounded-md transition delay-50 duration-1000 ease-in-out hover:bg-red-100 flex items-center gap-2 text-gray-100 mb-2 font-medium',
+              'py-3 px-3 rounded-md transition delay-50 duration-1000 ease-in-out hover:bg-red-100 flex items-center gap-2 text-gray-100 mb-1 font-medium',
               { 'text-red font-extrabold': isCurrentRoute(item) },
               item.class,
             ]"
@@ -30,8 +30,8 @@
           </router-link>
         </nav>
 
-        <nav class="mt-14 flex flex-col">
-          <div class="px-3 mb-6 text-gray-200 font-extrabold text-xs">
+        <nav class="mt-9 flex flex-col">
+          <div class="px-3 mb-3 text-gray-200 font-extrabold text-xs">
             PAYMENTS
           </div>
           <router-link
@@ -39,7 +39,7 @@
             :key="item.id"
             :to="item.path"
             :class="[
-              'py-3 px-3 rounded-md transition delay-50 duration-1000 ease-in-out hover:bg-red-100 flex items-center gap-2 text-gray-100 mb-2 font-medium',
+              'py-3 px-3 rounded-md transition delay-50 duration-1000 ease-in-out hover:bg-red-100 flex items-center gap-2 text-gray-100 mb-1 font-medium',
               { 'text-red font-extrabold': isCurrentRoute(item) },
               item.class,
             ]"
@@ -49,8 +49,8 @@
           </router-link>
         </nav>
 
-        <nav class="mt-14 flex flex-col">
-          <div class="px-3 mb-6 text-gray-200 font-extrabold text-xs">
+        <nav class="mt-9 flex flex-col">
+          <div class="px-3 mb-3 text-gray-200 font-extrabold text-xs">
             OTHERS
           </div>
           <router-link
@@ -58,7 +58,7 @@
             :key="item.id"
             :to="item.path"
             :class="[
-              'py-3 px-3 rounded-md transition delay-50 duration-1000 ease-in-out hover:bg-red-100 flex items-center gap-2 text-gray-100 mb-2 font-medium',
+              'py-3 px-3 rounded-md transition delay-50 duration-1000 ease-in-out hover:bg-red-100 flex items-center gap-2 text-gray-100 mb-1 font-medium',
               { 'text-red font-extrabold': isCurrentRoute(item) },
               item.class,
             ]"
@@ -68,7 +68,7 @@
           </router-link>
         </nav>
 
-        <nav class="flex flex-col mt-28 mb-10">
+        <nav class="flex flex-col mt-14 mb-5">
           <router-link
             v-for="item in actionRoutes"
             :key="item.id"
