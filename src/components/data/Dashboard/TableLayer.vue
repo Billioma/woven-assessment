@@ -3,18 +3,18 @@
     <div class="bg-white rounded-xl pt-30px sm:px-4 md:px-8 pb-4">
       <div class="flex items-center">
         <div
-          v-for="item in tableTabs"
-          :key="item"
+          v-for="tab in tableTabs"
+          :key="tab"
+          @click="selectTab(tab)"
           :class="[
             'text-gray-100 text-sm pb-5 text-center sm:px-5 md:px-10 cursor-pointer hover:text-red',
             {
               'text-red font-extrabold border-b-4 border-red':
-                item === selectedFilter,
+                tab === selectedFilter,
             },
           ]"
-          @click="selectTab(item)"
         >
-          {{ item }}
+          {{ tab }}
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@ export default {
   },
   data() {
     return {
-      tableTabs: tableTabs,
+      tableTabs,
       selectedFilter: "Transactions",
       selectedComponent: TransactionTable,
     };

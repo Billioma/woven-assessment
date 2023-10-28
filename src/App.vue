@@ -1,6 +1,5 @@
 <template>
   <layout>
-    <!--Your application goes here -->
     <router-view />
   </layout>
 </template>

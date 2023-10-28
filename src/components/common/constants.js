@@ -133,7 +133,7 @@ export const actionRoutes = [
     id: 2,
     name: "Log Out",
     secName: "Logging Out",
-    path: "",
+    path: "/log-out",
     iconComponent: LogoutIcon,
     secComponent: LogoutAltIcon,
   },

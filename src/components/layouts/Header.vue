@@ -13,20 +13,23 @@
 
         <div class="flex items-center gap-8">
           <div
-            class="font-medium"
-            :class="['text-gray-300', { 'text-dark-green': isLiveModeChecked }]"
+            :class="[
+              'text-gray-300 font-medium',
+              { 'text-dark-green': isLiveModeChecked },
+            ]"
           >
             Live Mode
           </div>
 
-          <div @click="openPanel" class="cursor-pointer">
+          <div @click="openPanel" class="cursor-pointer lg:hidden">
             <img class="w-5 h-5" src="../../assets/menu.svg" />
           </div>
         </div>
       </div>
     </div>
+    
     <VueSidePanel v-model="panelVisible" :width="300">
-      <SideDrawerVue @closeDrawer="openPanel" />
+      <Sidebar @closeDrawer="openPanel" />
     </VueSidePanel>
   </div>
 </template>
@@ -34,12 +37,12 @@
 <script>
 import { ref } from "vue";
 import { VueSidePanel } from "vue3-side-panel";
-import SideDrawerVue from "./SideDrawer.vue";
+import Sidebar from "./Sidebar.vue";
 
 export default {
   components: {
     VueSidePanel,
-    SideDrawerVue,
+    Sidebar,
   },
   setup() {
     const panelVisible = ref(false);

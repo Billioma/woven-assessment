@@ -5,7 +5,7 @@
         <Header />
       </div>
       <div class="hidden lg:flex">
-        <Sidebar />
+        <Sidebar :isFixed="true" />
       </div>
       <main class="overflow-auto">
         <div class="pt-28 pl-5 lg:pl-72 pr-5 lg:pr-10 pb-5">

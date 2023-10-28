@@ -25,7 +25,7 @@
         </div>
 
         <div class="border-t border-gray-400 mt-7 pt-5">
-          <div class="flex items-center justify-between w-full">
+          <div class="flex items-center justify-between w-full cursor-pointer">
             <div class="flex items-center gap-2">
               <div class="text-red-200 text-xs font-medium">
                 View Transactions

@@ -5,18 +5,20 @@
         <thead>
           <tr>
             <th
-              v-for="item in transactionsHeader"
-              :key="item.id"
+              v-for="header in transactionsHeader"
+              :key="header.id"
               :class="[
-                'bg-white pl-8 top-0 sticky py-7 text-gray-500 text-xs font-extrabold uppercase ',
-                getHeadClass(item.id),
+                'bg-white pl-8 top-0 sticky py-7 text-gray-500 text-xs font-extrabold uppercase',
+                getHeadClass(header.id),
               ]"
             >
-              <div :class="['flex items-center gap-2', headerFlex(item.id)]">
+              <div
+                :class="['flex headers-center gap-2', headerFlex(header.id)]"
+              >
                 <div>
-                  {{ item.label }}
+                  {{ header.label }}
                 </div>
-                <div :class="['hiden', displayIcon(item.id)]">
+                <div :class="['hiden', displayIcon(header.id)]">
                   <img src="../../../assets/reverse-arrow.svg" />
                 </div>
               </div>
@@ -25,30 +27,30 @@
         </thead>
         <tbody>
           <tr
-            v-for="item in transactionsData"
-            :key="item.id"
+            v-for="transaction in transactionsData"
+            :key="transaction.id"
             :class="[
               'text-sm text-gray-100 font-medium cursor-pointer hover:shadow-xl hover:bg-gray-700',
-              getRowClass(item.id),
+              getRowClass(transaction.id),
             ]"
-            @click="navigateToDetails(item.id)"
+            @click="navigateToDetails(transaction.id)"
           >
             <td class="pl-8 py-4">
               <div class="text-gray-600 capitalize font-extrabold">
-                {{ item.fullName }}
+                {{ transaction.fullName }}
               </div>
               <div class="mt-2 text-gray-500">
-                {{ item.email }}
+                {{ transaction.email }}
               </div>
             </td>
             <td class="py-4 pl-8">
-              {{ item.amount }}
+              {{ transaction.amount }}
             </td>
             <td class="uppercase py-4 pl-8">
-              {{ item.reference }}
+              {{ transaction.reference }}
             </td>
             <td class="text-xs uppercase py-4 text-center pl-8">
-              {{ item.channel }}
+              {{ transaction.channel }}
             </td>
 
             <td class="py-4 pl-8">
@@ -58,23 +60,23 @@
                 <div
                   :class="[
                     'text-xs flex flex-col justify-center px-5 py-1 items-center rounded-md h-6',
-                    getTextClass(item.status),
+                    getTextClass(transaction.status),
                   ]"
                 >
-                  {{ item.status }}
+                  {{ transaction.status }}
                 </div>
               </div>
             </td>
             <td
               :class="[
                 'text-xs  pl-8 uppercase py-4 text-center',
-                getTextClass(item.type),
+                getTextClass(transaction.type),
               ]"
             >
-              {{ item.type }}
+              {{ transaction.type }}
             </td>
             <td class="px-8 text-gray-500 py-4 text-center">
-              {{ item.createdAt }}
+              {{ transaction.createdAt }}
             </td>
           </tr>
         </tbody>
@@ -90,80 +92,43 @@
 
 <script>
 import { transactionsData, transactionsHeader } from "../../common/constants";
+
 export default {
   data() {
     return {
-      transactionsHeader: transactionsHeader,
-      transactionsData: transactionsData,
+      transactionsHeader,
+      transactionsData,
     };
   },
   methods: {
-    navigateToDetails(itemId) {
+    navigateToDetails(id) {
       this.$router.push({
         name: "transaction details",
-        params: { id: itemId },
+        params: { id },
       });
     },
     getTextClass(status) {
-      if (status === "Failed") {
-        return {
-          "text-red": true,
-          "bg-red-100": true,
-        };
-      } else if (status === "Successful") {
-        return {
-          "bg-light-green": true,
-          "text-green-200": true,
-        };
-      } else if (status === "PAYOUT") {
-        return {
-          "text-red": true,
-        };
-      } else if (status === "COLLECTION") {
-        return {
-          "text-green-200": true,
-        };
-      }
+      const statusClasses = {
+        Failed: { "text-red bg-red-100": true },
+        Successful: { "bg-light-green text-green-200": true },
+        PAYOUT: { "text-red": true },
+        COLLECTION: { "text-green-200": true },
+      };
+      return statusClasses[status] || {};
     },
-    getHeadClass(item) {
-      if (item > 3) {
-        return {
-          "text-center": true,
-        };
-      } else if (item === 1) {
-        return {
-          "pl-8": true,
-        };
-      }
+    getHeadClass(id) {
+      if (id > 3) return { "text-center": true };
+      if (id === 1) return { "pl-8": true };
+      return {};
     },
-    headerFlex(item) {
-      if (item < 4) {
-        return {
-          "justify-start": true,
-        };
-      } else {
-        return {
-          "justify-center": true,
-        };
-      }
+    headerFlex(id) {
+      return id < 4 ? { "justify-start": true } : { "justify-center": true };
     },
-    displayIcon(item) {
-      if (item > 4) {
-        return {
-          flex: true,
-        };
-      } else {
-        return {
-          hidden: true,
-        };
-      }
+    displayIcon(id) {
+      return id > 4 ? { flex: true } : { hidden: true };
     },
-    getRowClass(item) {
-      if (item % 2 === 0) {
-        return {
-          "bg-gray-700": true,
-        };
-      }
+    getRowClass(id) {
+      return id % 2 === 0 ? { "bg-gray-700": true } : {};
     },
   },
 };

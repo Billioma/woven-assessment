@@ -5,47 +5,47 @@
         <thead>
           <tr>
             <th
-              v-for="item in customersHeader"
-              :key="item.id"
+              v-for="header in customersHeader"
+              :key="header.id"
               :class="[
-                'bg-white top-0 sticky py-7 text-gray-200 text-xs font-extrabold uppercase ',
-                getHeadClass(item.id),
+                'bg-white top-0 sticky py-7 text-gray-200 text-xs font-extrabold uppercase pl-8',
+                getHeadClass(header.id),
               ]"
             >
-              {{ item.label }}
+              {{ header.label }}
             </th>
           </tr>
         </thead>
         <tbody>
           <tr
-            v-for="item in customersData"
-            :key="item.id"
+            v-for="customer in customersData"
+            :key="customer.id"
             :class="[
               'text-sm text-gray-100 font-medium  hover:shadow-xl hover:bg-gray-700 cursor-pointer',
-              getRowClass(item.id),
+              getRowClass(customer.id),
             ]"
-            @click="navigateToDetails(item.id)"
+            @click="navigateToDetails(customer.id)"
           >
             <td class="pl-8 py-4">
               <div class="text-gray-600 capitalize font-extrabold">
-                {{ item.fullName }}
+                {{ customer.fullName }}
               </div>
               <div class="mt-2 text-gray-500">
-                {{ item.email }}
+                {{ customer.email }}
               </div>
             </td>
             <td class="py-4 pl-8">
-              {{ item.phone }}
+              {{ customer.phone }}
             </td>
             <td class="py-4 pl-8">
-              {{ item.nuban }}
+              {{ customer.nuban }}
             </td>
             <td class="text-xs pl-8 uppercase py-4">
-              {{ item.reference }}
+              {{ customer.reference }}
             </td>
 
             <td class="px-8 text-gray-500 py-4">
-              {{ item.createdAt }}
+              {{ customer.createdAt }}
             </td>
           </tr>
         </tbody>
@@ -61,34 +61,27 @@
 
 <script>
 import { customersData, customersHeader } from "../../common/constants";
+
 export default {
   data() {
     return {
-      customersHeader: customersHeader,
-      customersData: customersData,
+      customersHeader,
+      customersData,
     };
   },
   methods: {
-    navigateToDetails(itemId) {
+    navigateToDetails(id) {
       this.$router.push({
         name: "transaction details",
-        params: { id: itemId },
+        params: { id },
       });
     },
-    getHeadClass(item) {
-      if (item === 1) {
-        return {
-          "pl-8": true,
-        };
-      }
+    getHeadClass(id) {
+      return id === 1 ? { "pl-8": true } : {};
     },
 
-    getRowClass(item) {
-      if (item % 2 === 0) {
-        return {
-          "bg-gray-700": true,
-        };
-      }
+    getRowClass(id) {
+      return id % 2 === 0 ? { "bg-gray-700": true } : {};
     },
   },
 };

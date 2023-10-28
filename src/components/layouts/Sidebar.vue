@@ -1,5 +1,10 @@
 <template>
-  <div class="custom-gradient h-screen flex justify-between fixed z-10 w-60">
+  <div
+    :class="[
+      isFixed ? 'fixed z-10' : '',
+      'custom-gradient h-screen flex justify-between w-60',
+    ]"
+  >
     <div class="flex-1 h-screen overflow-auto">
       <div class="sticky pt-5 top-0 custom-gradient z-10">
         <div
@@ -13,76 +18,67 @@
         </div>
       </div>
 
-      <div class="mx-3 mt-6">
-        <nav class="flex flex-col">
-          <router-link
-            v-for="item in generalRoutes"
-            :key="item.id"
-            :to="item.path"
+      <div class="mt-6 mx-3">
+        <nav
+          v-for="nav in navigation"
+          :key="nav.group"
+          class="flex flex-col"
+          :class="[nav.group === 'Actions' && 'mt-14']"
+        >
+          <div
+            v-if="nav.text"
             :class="[
-              'py-3 px-3 rounded-md transition delay-50 duration-1000 ease-in-out hover:bg-red-100 flex items-center gap-2 text-gray-100 mb-1 font-medium',
-              { 'text-red font-extrabold': isCurrentRoute(item) },
-              item.class,
+              'px-3',
+              nav.mt ? `mt-${nav.mt}` : 'mt-9',
+              'mb-3 text-gray-200 font-extrabold text-xs',
             ]"
           >
-            <component :is="getIconComponent(item)" />
-            <div class="text-xs">{{ item.name }}</div>
-          </router-link>
-        </nav>
-
-        <nav class="mt-9 flex flex-col">
-          <div class="px-3 mb-3 text-gray-200 font-extrabold text-xs">
-            PAYMENTS
+            {{ nav.text }}
           </div>
           <router-link
-            v-for="item in paymentRoutes"
+            v-for="(item, index) in nav.items"
             :key="item.id"
             :to="item.path"
-            :class="[
-              'py-3 px-3 rounded-md transition delay-50 duration-1000 ease-in-out hover:bg-red-100 flex items-center gap-2 text-gray-100 mb-1 font-medium',
-              { 'text-red font-extrabold': isCurrentRoute(item) },
-              item.class,
-            ]"
+            @click="!isFixed ? closeDrawer() : handleActionClick(item)"
           >
-            <component :is="getIconComponent(item)" />
-            <div class="text-xs">{{ item.name }}</div>
-          </router-link>
-        </nav>
+            <div
+              :class="[
+                'flex items-center gap-16 w-full rounded-md transition delay-50 duration-1000 ease-in-out',
+                { 'hover:bg-red-100': !isCurrentRoute(item) },
+              ]"
+            >
+              <div
+                :class="[
+                  'py-3 text-gray-100 mb-1 font-medium',
+                  { 'text-red font-extrabold': isCurrentRoute(item) },
+                  item.class,
+                ]"
+              >
+                <div class="flex items-center gap-3">
+                  <div v-if="isCurrentRoute(item)">
+                    <div class="bg-red h-4 w-1 rounded-sm"></div>
+                  </div>
 
-        <nav class="mt-9 flex flex-col">
-          <div class="px-3 mb-3 text-gray-200 font-extrabold text-xs">
-            OTHERS
-          </div>
-          <router-link
-            v-for="item in otherRoutes"
-            :key="item.id"
-            :to="item.path"
-            :class="[
-              'py-3 px-3 rounded-md transition delay-50 duration-1000 ease-in-out hover:bg-red-100 flex items-center gap-2 text-gray-100 mb-1 font-medium',
-              { 'text-red font-extrabold': isCurrentRoute(item) },
-              item.class,
-            ]"
-          >
-            <component :is="getIconComponent(item)" />
-            <div class="text-xs">{{ item.name }}</div>
-          </router-link>
-        </nav>
-
-        <nav class="flex flex-col mt-14 mb-5">
-          <router-link
-            v-for="item in actionRoutes"
-            :key="item.id"
-            :to="item.path"
-            @click="handleActionClick(item)"
-            :class="[
-              'py-3 px-3 rounded-md transition delay-50 duration-1000 ease-in-out hover-bg-red-100 flex items-center gap-2 text-gray-100 mb-2 font-medium',
-              { 'text-red font-extrabold': isCurrentRoute(item) },
-              item.class,
-            ]"
-          >
-            <component :is="getIconComponent(item)" />
-            <div :class="['text-xs', { 'text-red': isLoggingOut(item) }]">
-              {{ item.name }}
+                  <div
+                    :class="[
+                      'flex ml-3 items-center gap-2',
+                      { 'ml-12px pl-3': isCurrentRoute(item) },
+                    ]"
+                  >
+                    <component :is="getIconComponent(item)" />
+                    <div
+                      :class="['text-xs', { 'text-red': isLoggingOut(item) }]"
+                    >
+                      {{ item.name }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <img
+                v-if="showArrow(index, nav)"
+                class="w-3 h-3"
+                src="../../assets/arrow.svg"
+              />
             </div>
           </router-link>
         </nav>
@@ -100,30 +96,35 @@ import {
 } from "../common/constants";
 
 export default {
+  props: {
+    isFixed: Boolean,
+  },
   data() {
+    const groupedRoutes = [
+      { group: "General", text: null, items: generalRoutes },
+      { group: "Payments", text: "PAYMENTS", items: paymentRoutes, mt: 0 },
+      { group: "Others", text: "OTHERS", items: otherRoutes, mt: 0 },
+      { group: "Actions", text: null, items: actionRoutes, mt: 14 },
+    ];
+
     return {
-      generalRoutes: generalRoutes,
-      paymentRoutes: paymentRoutes,
-      otherRoutes: otherRoutes,
-      actionRoutes: actionRoutes,
+      navigation: groupedRoutes,
     };
   },
   methods: {
+    closeDrawer() {
+      this.$emit("closeDrawer");
+    },
     handleActionClick(item) {
       if (item.name === "Log Out") {
         item.name = "Logging Out";
-
-        if (item.name === "Logging Out") {
-          setTimeout(() => {
-            item.name = "Log Out";
-          }, 1500);
-        }
+        setTimeout(() => {
+          item.name = "Log Out";
+        }, 1500);
       }
     },
     getIconComponent(item) {
-      if (this.$route.path === item.path) {
-        return item.secComponent;
-      } else if (item.name === "Logging Out") {
+      if (this.$route.path === item.path || item.name === "Logging Out") {
         return item.secComponent;
       } else {
         return item.iconComponent;
@@ -134,6 +135,9 @@ export default {
     },
     isCurrentRoute(item) {
       return this.$route.path.includes(item.path);
+    },
+    showArrow(index, nav) {
+      return nav.group === "Payments" && index === 1;
     },
   },
 };

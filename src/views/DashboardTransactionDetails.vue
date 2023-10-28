@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex items-center gap-1 cursor-pointer" @click="goBack">
+    <div class="flex items-center gap-1 cursor-pointer w-fit" @click="goBack">
       <img src="../assets/back-arrow.svg" />
       <div class="text-xs text-gray-100">Back</div>
     </div>
@@ -111,7 +111,7 @@
           <div>TRANSACTION LOGS</div>
           <div class="flex items-center gap-2">
             <div><img src="../assets/refresh-icon.svg" /></div>
-            <div class="text-green-100 font-extrabold text-xs">
+            <div class="text-green-100 font-extrabold text-xs cursor-pointer">
               Resend callback
             </div>
           </div>
@@ -168,7 +168,7 @@ export default {
   },
   data() {
     return {
-      transactionsData: transactionsData,
+      transactionsData,
       filteredTransactionsData: [],
     };
   },
