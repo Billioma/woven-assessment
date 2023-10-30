@@ -25,10 +25,7 @@ module.exports = {
       fontFamily: {
         Avenir: ["Avenir"],
       },
-      backgroundImage: {
-        "custom-gradient":
-          "linear-gradient(241deg, rgba(204, 255, 250, 0.25) -2.96%, rgba(255, 252, 245, 0.25) 44.27%, rgba(255, 229, 233, 0.25) 89.58%), #FFF",
-      },
+      
       borderRadius: {
         4: "4px",
       },

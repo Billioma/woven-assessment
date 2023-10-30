@@ -8,7 +8,7 @@
               v-for="header in customersHeader"
               :key="header.id"
               :class="[
-                'bg-white top-0 sticky py-7 text-gray-200 text-xs font-extrabold uppercase pl-8',
+                'bg-white border-b border-gray-900 rounded-t-xl top-0 sticky py-7 text-gray-200 text-xs font-extrabold uppercase pl-8',
                 getHeadClass(header.id),
               ]"
             >
@@ -21,7 +21,7 @@
             v-for="customer in customersData"
             :key="customer.id"
             :class="[
-              'text-sm text-gray-100 font-medium  hover:shadow-xl hover:bg-gray-700 cursor-pointer',
+              'text-sm text-gray-100 font-medium cursor-pointer',
               getRowClass(customer.id),
             ]"
             @click="navigateToDetails(customer.id)"

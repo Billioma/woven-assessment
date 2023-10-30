@@ -8,7 +8,7 @@
               v-for="header in transactionsHeader"
               :key="header.id"
               :class="[
-                'bg-white pl-8 top-0 sticky py-7 text-gray-500 text-xs font-extrabold uppercase',
+                'bg-white border-b border-gray-900 rounded-t-xl pl-8 top-0 sticky py-7 text-gray-500 text-xs font-extrabold uppercase',
                 getHeadClass(header.id),
               ]"
             >
@@ -30,7 +30,7 @@
             v-for="transaction in transactionsData"
             :key="transaction.id"
             :class="[
-              'text-sm text-gray-100 font-medium cursor-pointer hover:shadow-xl hover:bg-gray-700',
+              'text-sm text-gray-100 font-medium cursor-pointer',
               getRowClass(transaction.id),
             ]"
             @click="navigateToDetails(transaction.id)"
