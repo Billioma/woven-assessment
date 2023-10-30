@@ -39,7 +39,7 @@ export const generalRoutes = [
   {
     id: 2,
     name: "Dashboard",
-    path: "/",
+    path: "/dashboard",
     iconComponent: DashboardIcon,
     secComponent: DashboardAltIcon,
   },
